@@ -21,6 +21,8 @@ public class AiTestSynthesisClient : IAiTestSynthesisProvider
             AiProvider.LocalLlamaCpp => new LocalLlamaProvider(options),
             AiProvider.OpenAIResponses => new OpenAIProvider(options),
             AiProvider.CustomHttp => new CustomHttpProvider(options),
+            AiProvider.Mock => new MockAiProvider(options),
+            AiProvider.Claude => new ClaudeProvider(options),
             _ => throw new NotSupportedException($"Provider {options.Provider} is not supported.")
         };
     }

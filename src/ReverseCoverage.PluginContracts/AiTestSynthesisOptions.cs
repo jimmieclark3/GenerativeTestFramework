@@ -61,6 +61,8 @@ public enum AiProvider
 {
     LocalLlamaCpp,
     OpenAIResponses,
-    CustomHttp
+    CustomHttp,
+    Mock,   // For testing/feasibility validation
+    Claude  // Anthropic Claude API
 }
 

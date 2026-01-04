@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DemoCalc\DemoCalc.csproj" />
+    <ProjectReference Include="..\MarkdownHelper\MarkdownHelper.csproj" />
   </ItemGroup>
 
 </Project>
