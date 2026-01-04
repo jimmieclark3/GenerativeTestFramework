@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,5 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ReverseCoverage.AiTestSynthesis\ReverseCoverage.AiTestSynthesis.csproj" />
+    <ProjectReference Include="..\ReverseCoverage.ContextCollector\ReverseCoverage.ContextCollector.csproj" />
+    <ProjectReference Include="..\ReverseCoverage.CoverageParser\ReverseCoverage.CoverageParser.csproj" />
+    <ProjectReference Include="..\ReverseCoverage.CoverageRunner\ReverseCoverage.CoverageRunner.csproj" />
+    <ProjectReference Include="..\ReverseCoverage.PluginContracts\ReverseCoverage.PluginContracts.csproj" />
+    <ProjectReference Include="..\ReverseCoverage.TestEmitter\ReverseCoverage.TestEmitter.csproj" />
+    <ProjectReference Include="..\ReverseCoverage.Verifier\ReverseCoverage.Verifier.csproj" />
+  </ItemGroup>
 
 </Project>
