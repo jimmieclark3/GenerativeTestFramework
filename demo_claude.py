@@ -9,7 +9,11 @@ import json
 import urllib.request
 import urllib.error
 
-API_KEY = "REMOVED_API_KEY"
+API_KEY = os.environ.get("CLAUDE_API_KEY", "")
+if not API_KEY:
+    print("Error: CLAUDE_API_KEY environment variable not set")
+    print("Usage: export CLAUDE_API_KEY='your-key' && python3 demo_claude.py")
+    exit(1)
 
 print("═══════════════════════════════════════════════════════")
 print("   CLAUDE API TEST GENERATION DEMO")

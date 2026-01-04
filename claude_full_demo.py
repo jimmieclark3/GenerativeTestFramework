@@ -10,7 +10,12 @@ import urllib.request
 import subprocess
 import glob
 
-API_KEY = "REMOVED_API_KEY"
+API_KEY = os.environ.get("CLAUDE_API_KEY", "")
+if not API_KEY:
+    print("Error: CLAUDE_API_KEY environment variable not set")
+    print("Usage: export CLAUDE_API_KEY='your-key' && python3 claude_full_demo.py")
+    exit(1)
+
 os.environ["PATH"] = "/tmp/dotnet:" + os.environ.get("PATH", "")
 
 print("═══════════════════════════════════════════════════════")
