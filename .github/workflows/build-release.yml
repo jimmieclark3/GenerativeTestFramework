@@ -119,9 +119,21 @@ jobs:
           --configuration Release \
           --output ./release-packages/libraries
         
+        # Create examples package with generated tests
+        mkdir -p ./release-packages/examples
+        cp -r src/DemoCalc ./release-packages/examples/
+        cp -r src/DemoCalc.Tests ./release-packages/examples/
+        cp -r src/MarkdownHelper ./release-packages/examples/
+        cp -r src/MarkdownHelper.Tests ./release-packages/examples/
+        cp claude_full_demo.py ./release-packages/examples/
+        cp demo_claude.py ./release-packages/examples/
+        cp test_shouldly.py ./release-packages/examples/
+        cp *.md ./release-packages/examples/ 2>/dev/null || true
+        
         # Create zip files
         cd release-packages
         zip -r ReverseCoverage-Framework-v${{ steps.get_version.outputs.VERSION }}.zip orchestrator/ libraries/
+        zip -r ReverseCoverage-Examples-v${{ steps.get_version.outputs.VERSION }}.zip examples/
         cd ..
 
     - name: Generate release notes
