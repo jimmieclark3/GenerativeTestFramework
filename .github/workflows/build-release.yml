@@ -102,7 +102,7 @@ jobs:
         # Create output directory
         mkdir -p ./release-packages
         
-        # Package Orchestrator
+        # Package Orchestrator (executable)
         dotnet publish src/ReverseCoverage.Orchestrator/ReverseCoverage.Orchestrator.csproj \
           --configuration Release \
           --output ./release-packages/orchestrator \
@@ -110,18 +110,18 @@ jobs:
           -p:PublishTrimmed=false \
           --self-contained false
         
-        # Package CoverageRunner
+        # Package framework libraries (not single-file)
         dotnet publish src/ReverseCoverage.CoverageRunner/ReverseCoverage.CoverageRunner.csproj \
           --configuration Release \
-          --output ./release-packages/coverage-runner \
-          -p:PublishSingleFile=true \
-          -p:PublishTrimmed=false \
-          --self-contained false
+          --output ./release-packages/libraries
+        
+        dotnet publish src/ReverseCoverage.AiTestSynthesis/ReverseCoverage.AiTestSynthesis.csproj \
+          --configuration Release \
+          --output ./release-packages/libraries
         
         # Create zip files
         cd release-packages
-        zip -r ReverseCoverage-Orchestrator-v${{ steps.get_version.outputs.VERSION }}.zip orchestrator/
-        zip -r ReverseCoverage-CoverageRunner-v${{ steps.get_version.outputs.VERSION }}.zip coverage-runner/
+        zip -r ReverseCoverage-Framework-v${{ steps.get_version.outputs.VERSION }}.zip orchestrator/ libraries/
         cd ..
 
     - name: Generate release notes
