@@ -137,7 +137,7 @@ public class ClaudeProvider : IAiTestSynthesisProvider
             sb.AppendLine("Branch Points to Cover:");
             foreach (var hint in request.BranchHints)
             {
-                sb.AppendLine($"- {hint.Id}: {hint.Description}");
+                sb.AppendLine($"- {hint.Kind}: {string.Join(", ", hint.SuggestedMutations)}");
             }
             sb.AppendLine();
         }
@@ -209,7 +209,7 @@ public class ClaudeProvider : IAiTestSynthesisProvider
                 var test = new TestCaseSpec
                 {
                     TestName = testName,
-                    TargetMethodId = $"{request.TargetMethod.TypeName}|{request.TargetMethod.MethodName}",
+                    TargetMethodId = request.TargetMethod.MethodId ?? "Unknown",
                     Arrange = new[] { new StepSpec { Kind = "Code", Text = arrangeCode } },
                     Act = new StepSpec { Kind = "Code", Text = actCode },
                     Assert = new[] { new AssertionSpec { Kind = "Code", Text = assertCode } }
