@@ -1,0 +1,48 @@
+{
+  "projects": [
+    {
+      "name": "DemoCalc",
+      "description": "Simple calculator - our baseline test",
+      "solutionPath": "ReverseCoverage.sln",
+      "testProjectPaths": [
+        "src/DemoCalc.Tests/DemoCalc.Tests.csproj"
+      ],
+      "coverageThreshold": 80,
+      "iterationBudget": 5,
+      "enabled": true
+    },
+    {
+      "name": "Humanizer",
+      "description": "String manipulation library",
+      "gitRepo": "https://github.com/Humanizr/Humanizer.git",
+      "clonePath": "external/Humanizer",
+      "solutionPath": "external/Humanizer/Humanizer.sln",
+      "testProjectPaths": [
+        "external/Humanizer/src/Humanizer.Tests/Humanizer.Tests.csproj"
+      ],
+      "coverageThreshold": 70,
+      "iterationBudget": 10,
+      "enabled": false,
+      "notes": "Example: Popular string manipulation library"
+    },
+    {
+      "name": "Newtonsoft.Json",
+      "description": "JSON serialization library",
+      "gitRepo": "https://github.com/JamesNK/Newtonsoft.Json.git",
+      "clonePath": "external/Newtonsoft.Json",
+      "solutionPath": "external/Newtonsoft.Json/Src/Newtonsoft.Json.sln",
+      "testProjectPaths": [
+        "external/Newtonsoft.Json/Src/Newtonsoft.Json.Tests/Newtonsoft.Json.Tests.csproj"
+      ],
+      "coverageThreshold": 60,
+      "iterationBudget": 15,
+      "enabled": false,
+      "notes": "Example: Widely-used JSON library"
+    }
+  ],
+  "executionMode": "sequential",
+  "parallelismDegree": 2,
+  "outputDirectory": "artifacts/multi-project-feasibility",
+  "generateComparativeReport": true,
+  "stopOnFirstFailure": false
+}
