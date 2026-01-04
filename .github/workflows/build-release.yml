@@ -55,15 +55,11 @@ jobs:
       run: |
         dotnet publish src/ReverseCoverage.Orchestrator/ReverseCoverage.Orchestrator.csproj \
           --configuration Release \
-          --output ./publish/orchestrator \
-          --no-restore \
-          --no-build
+          --output ./publish/orchestrator
         
         dotnet publish src/ReverseCoverage.CoverageRunner/ReverseCoverage.CoverageRunner.csproj \
           --configuration Release \
-          --output ./publish/coverage-runner \
-          --no-restore \
-          --no-build
+          --output ./publish/coverage-runner
 
     - name: Upload build artifacts
       if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
