@@ -133,9 +133,13 @@ Time:      ~30 seconds total (including API call)
 
 ---
 
-## 🔑 Your API Key
+## 🔑 API Key Setup
 
-Your Claude API key: `sk-ant-api03-ruVzZ7...`
+Set your Claude API key as an environment variable:
+
+```bash
+export CLAUDE_API_KEY="your-claude-api-key-here"
+```
 
 **Model**: `claude-sonnet-4-5-20250929` (Claude Sonnet 4.5)
 
