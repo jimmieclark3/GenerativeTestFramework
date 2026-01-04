@@ -2,7 +2,7 @@
   "projects": [
     {
       "name": "DemoCalc",
-      "description": "Simple calculator - our baseline test",
+      "description": "Simple calculator with 10 branch points",
       "solutionPath": "ReverseCoverage.sln",
       "testProjectPaths": [
         "src/DemoCalc.Tests/DemoCalc.Tests.csproj"
@@ -10,6 +10,18 @@
       "coverageThreshold": 80,
       "iterationBudget": 5,
       "enabled": true
+    },
+    {
+      "name": "MarkdownHelper",
+      "description": "Markdown parsing utility - real-world example",
+      "solutionPath": "ReverseCoverage.sln",
+      "testProjectPaths": [
+        "src/MarkdownHelper.Tests/MarkdownHelper.Tests.csproj"
+      ],
+      "coverageThreshold": 70,
+      "iterationBudget": 10,
+      "enabled": true,
+      "notes": "Tests side-by-side comparison with DemoCalc"
     },
     {
       "name": "Humanizer",
