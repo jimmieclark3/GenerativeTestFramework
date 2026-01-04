@@ -83,7 +83,7 @@ Generate 5-8 xUnit test methods that cover all 10 branch points (B1-B10). Write 
 
 # Prepare request
 request_data = {
-    "model": "claude-3-sonnet-20240229",
+    "model": "claude-sonnet-4-5-20250929",
     "max_tokens": 2000,
     "temperature": 0,
     "messages": [
