@@ -64,6 +64,7 @@ public enum AiProvider
     CustomHttp,
     Mock,   // For testing/feasibility validation
     Claude,  // Anthropic Claude API
-    Ollama   // Local Ollama LLM server
+    Ollama,   // Local Ollama LLM server
+    ZooLLM    // ZooLLM cloud API
 }
 

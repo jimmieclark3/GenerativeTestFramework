@@ -49,7 +49,7 @@ public static class OrchestratorApp
         var providerOption = new Option<string>(
             "--provider",
             () => "LocalLlamaCpp",
-            "AI provider: LocalLlamaCpp, OpenAIResponses, CustomHttp, Mock, Claude, or Ollama");
+            "AI provider: LocalLlamaCpp, OpenAIResponses, CustomHttp, Mock, Claude, Ollama, or ZooLLM");
 
         var generateAllOption = new Option<bool>(
             "--generate-all",
@@ -60,6 +60,10 @@ public static class OrchestratorApp
             "--output-folder",
             "Folder path to write generated tests (default: Generated folder in test project)");
 
+        var zooLLMProviderOption = new Option<string>(
+            "--zoollm-provider",
+            "ZooLLM provider name (required when using ZooLLM provider)");
+
         var rootCommand = new RootCommand("Reverse Coverage Test Synthesis Orchestrator")
         {
             solutionPathOption,
@@ -68,14 +72,15 @@ public static class OrchestratorApp
             iterationBudgetOption,
             providerOption,
             generateAllOption,
-            outputFolderOption
+            outputFolderOption,
+            zooLLMProviderOption
         };
 
-        rootCommand.SetHandler(async (solutionPath, testProjectPaths, coverageThreshold, iterationBudget, provider, generateAll, outputFolder) =>
+        rootCommand.SetHandler(async (solutionPath, testProjectPaths, coverageThreshold, iterationBudget, provider, generateAll, outputFolder, zooLLMProvider) =>
         {
-            await RunOrchestratorAsync(solutionPath, testProjectPaths, coverageThreshold, iterationBudget, provider, generateAll, outputFolder);
+            await RunOrchestratorAsync(solutionPath, testProjectPaths, coverageThreshold, iterationBudget, provider, generateAll, outputFolder, zooLLMProvider);
         },
-        solutionPathOption, testProjectPathOption, coverageThresholdOption, iterationBudgetOption, providerOption, generateAllOption, outputFolderOption);
+        solutionPathOption, testProjectPathOption, coverageThresholdOption, iterationBudgetOption, providerOption, generateAllOption, outputFolderOption, zooLLMProviderOption);
 
         return await rootCommand.InvokeAsync(args);
     }
@@ -87,7 +92,8 @@ public static class OrchestratorApp
         int iterationBudget,
         string provider,
         bool generateAll,
-        string? outputFolder)
+        string? outputFolder,
+        string? zooLLMProvider)
     {
         Console.WriteLine("Reverse Coverage Test Synthesis Orchestrator");
         Console.WriteLine($"Solution: {solutionPath}");
@@ -120,6 +126,18 @@ public static class OrchestratorApp
             aiOptions.Temperature = 0.0;
             aiOptions.MaxOutputTokens = 2000; // Full output with GPU acceleration
             aiOptions.RequestTimeout = TimeSpan.FromSeconds(60); // 60 seconds should be plenty with GPU
+            aiOptions.LogRequestBodies = true;
+            aiOptions.LogResponses = true;
+        }
+        
+        // Configure ZooLLM-specific settings
+        if (providerEnum == AiProvider.ZooLLM)
+        {
+            aiOptions.BaseUrl = "https://api.zoollm.com";
+            aiOptions.Model = zooLLMProvider; // Provider name from command line
+            aiOptions.Temperature = 0.0;
+            aiOptions.MaxOutputTokens = 2000;
+            aiOptions.RequestTimeout = TimeSpan.FromSeconds(60);
             aiOptions.LogRequestBodies = true;
             aiOptions.LogResponses = true;
         }

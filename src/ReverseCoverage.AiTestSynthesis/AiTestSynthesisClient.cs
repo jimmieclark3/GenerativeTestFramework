@@ -24,6 +24,7 @@ public class AiTestSynthesisClient : IAiTestSynthesisProvider
             AiProvider.Mock => new MockAiProvider(options),
             AiProvider.Claude => new ClaudeProvider(options),
             AiProvider.Ollama => new OllamaProvider(options),
+            AiProvider.ZooLLM => new ZooLLMProvider(options),
             _ => throw new NotSupportedException($"Provider {options.Provider} is not supported.")
         };
     }
