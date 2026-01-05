@@ -295,7 +295,7 @@ public class MultiProjectFeasibilityTest
             $"--test-project-path \"{testProjectPath}\" " +
             $"--coverage-threshold {project.CoverageThreshold} " +
             $"--iteration-budget {project.IterationBudget} " +
-            $"--provider Mock",
+            $"--provider Ollama",
             timeout: 300000);
     }
 

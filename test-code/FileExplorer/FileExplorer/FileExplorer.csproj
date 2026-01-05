@@ -1,0 +1,118 @@
+<!-- Project_Preamble -->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+   <PropertyGroup>
+      <ProjectType>Local</ProjectType>
+      <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+      <!-- addProjectTypeGuids -->
+      <SchemaVersion>2.0</SchemaVersion>
+      <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+      <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+      <ApplicationIcon></ApplicationIcon>
+      <AssemblyKeyContainerName></AssemblyKeyContainerName>
+      <AssemblyName>FileExplorer</AssemblyName>
+      <ProjectGuid>{1E5E1EC9-F687-D737-2B8A-2060992211F2}</ProjectGuid>
+      <OutputType>WinExe</OutputType>
+      <RootNamespace>FileExplorer</RootNamespace>
+      <StartupObject>FileExplorer.FileExplorer_Startup</StartupObject>
+      <DelaySign>false</DelaySign>
+      <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+      <FileAlignment>512</FileAlignment>
+      <Deterministic>true</Deterministic>
+   </PropertyGroup>
+   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <OutputPath>.\bin\</OutputPath>
+      <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+      <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+      <DefineConstants>DEBUG</DefineConstants>
+      <DocumentationFile>
+      </DocumentationFile>
+      <DebugSymbols>true</DebugSymbols>
+      <NoStdLib>false</NoStdLib>
+      <NoWarn></NoWarn>
+      <Optimize>false</Optimize>
+      <RegisterForComInterop>false</RegisterForComInterop>
+      <RemoveIntegerChecks>false</RemoveIntegerChecks>
+      <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+      <WarningLevel>1</WarningLevel>
+      <DebugType>full</DebugType>
+      <ErrorReport>prompt</ErrorReport>
+   </PropertyGroup>
+   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+      <OutputPath>.\bin\</OutputPath>
+      <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+      <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+      <DefineConstants>TRACE</DefineConstants>
+      <DocumentationFile>
+      </DocumentationFile>
+      <DebugSymbols>false</DebugSymbols>
+      <NoStdLib>false</NoStdLib>
+      <NoWarn></NoWarn>
+      <Optimize>true</Optimize>
+      <RegisterForComInterop>false</RegisterForComInterop>
+      <RemoveIntegerChecks>false</RemoveIntegerChecks>
+      <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+      <WarningLevel>1</WarningLevel>
+      <DebugType>none</DebugType>
+      <ErrorReport>prompt</ErrorReport>
+   </PropertyGroup>
+   <ItemGroup>
+      <Reference Include="System" />
+      <Reference Include="System.Data" />
+      <Reference Include="System.Drawing" />
+      <Reference Include="System.Windows.Forms" />
+      <Reference Include="System.Xml" />
+      <Reference Include="Microsoft.VisualBasic" />
+      <Reference Include="Microsoft.CSharp" />
+      <!-- gmRTL.MSComCtl.dll has extension methods supporting ListView sorting -->
+      <Reference Include="gmRTL.MSComCtl">
+         <HintPath>..\bin\gmRTL.MSComCtl.dll</HintPath>
+      </Reference>
+      <!-- ReferenceMigSupport -->
+      <Reference Include="gmRTL.Core">
+         <Name>gmRTL.Core</Name>
+         <HintPath>..\bin\gmRTL.Core.dll</HintPath>
+      </Reference>
+      <!-- Project_StartCompile -->
+      </ItemGroup>
+   <ItemGroup>
+      <Import Include="Microsoft.VisualBasic" />
+      <Import Include="Microsoft.VisualBasic.CompilerServices" />
+      <Import Include="System" />
+      <Import Include="System.Collections" />
+      <Import Include="System.Data" />
+      <Import Include="System.Diagnostics" />
+      <Import Include="System.Drawing" />
+      <Import Include="System.Windows.Forms" />
+   </ItemGroup>
+   <!-- Project_Assembly -->
+   <ItemGroup>
+      <Compile Include="Properties\AssemblyInfo.cs">
+         <SubType>Code</SubType>
+      </Compile>
+      <!-- AuthorProjectCompileIncludes -->
+      <Compile Include="frmExploreLite.Designer.cs">
+         <SubType>Code</SubType>
+         <DependentUpon>frmExploreLite.cs</DependentUpon>
+      </Compile>
+      <Compile Include="frmExploreLite.cs">
+         <SubType>Form</SubType>
+      </Compile>
+      <EmbeddedResource Include="frmExploreLite.resx">
+         <DependentUpon>frmExploreLite.cs</DependentUpon>
+         <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <!-- Project_EndCompile -->
+      <Compile Include="FileExplorer_Startup.cs">
+         <SubType>Code</SubType>
+      </Compile>
+      <!-- Add custom user Compiles in AddUserCompiles -->
+   </ItemGroup>
+   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+   <PropertyGroup>
+      <PreBuildEvent>
+      </PreBuildEvent>
+      <PostBuildEvent>
+      </PostBuildEvent>
+   </PropertyGroup>
+</Project>
+

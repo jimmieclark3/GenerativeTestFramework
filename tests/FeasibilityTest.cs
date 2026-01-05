@@ -93,7 +93,7 @@ public class FeasibilityTest
 
     private async Task<CoverageMetrics> MeasureBaselineCoverageAsync()
     {
-        var testProjectPath = Path.Combine(_workspaceRoot, "src", "DemoCalc.Tests", "DemoCalc.Tests.csproj");
+        var testProjectPath = Path.Combine(_workspaceRoot, "test-code", "DemoCalc.Tests", "DemoCalc.Tests.csproj");
         var coverageOutput = Path.Combine(_artifactsDir, "baseline-coverage");
         Directory.CreateDirectory(coverageOutput);
 
@@ -109,7 +109,7 @@ public class FeasibilityTest
 
     private async Task<CoverageMetrics> MeasureImprovedCoverageAsync()
     {
-        var testProjectPath = Path.Combine(_workspaceRoot, "src", "DemoCalc.Tests", "DemoCalc.Tests.csproj");
+        var testProjectPath = Path.Combine(_workspaceRoot, "test-code", "DemoCalc.Tests", "DemoCalc.Tests.csproj");
         var coverageOutput = Path.Combine(_artifactsDir, "improved-coverage");
         Directory.CreateDirectory(coverageOutput);
 
@@ -127,7 +127,7 @@ public class FeasibilityTest
     {
         var orchestratorProject = Path.Combine(_workspaceRoot, "src", "ReverseCoverage.Orchestrator", "ReverseCoverage.Orchestrator.csproj");
         var solutionPath = Path.Combine(_workspaceRoot, "ReverseCoverage.sln");
-        var testProjectPath = Path.Combine(_workspaceRoot, "src", "DemoCalc.Tests", "DemoCalc.Tests.csproj");
+        var testProjectPath = Path.Combine(_workspaceRoot, "test-code", "DemoCalc.Tests", "DemoCalc.Tests.csproj");
 
         return await RunProcessAsync("dotnet",
             $"run --project \"{orchestratorProject}\" --no-build -- " +
@@ -135,13 +135,13 @@ public class FeasibilityTest
             $"--test-project-path \"{testProjectPath}\" " +
             $"--coverage-threshold 80 " +
             $"--iteration-budget 5 " +
-            $"--provider LocalLlamaCpp",
+            $"--provider Ollama",
             timeout: 120000);
     }
 
     private async Task<TestAnalysis> AnalyzeGeneratedTestsAsync()
     {
-        var testProjectPath = Path.Combine(_workspaceRoot, "src", "DemoCalc.Tests", "DemoCalc.Tests.csproj");
+        var testProjectPath = Path.Combine(_workspaceRoot, "test-code", "DemoCalc.Tests", "DemoCalc.Tests.csproj");
 
         var result = await RunProcessAsync("dotnet",
             $"test \"{testProjectPath}\" --verbosity quiet --logger \"trx;LogFileName=test-results.trx\"");
@@ -208,7 +208,7 @@ public class FeasibilityTest
 
     private int CountTestsInProject()
     {
-        var testDir = Path.Combine(_workspaceRoot, "src", "DemoCalc.Tests");
+        var testDir = Path.Combine(_workspaceRoot, "test-code", "DemoCalc.Tests");
         var testFiles = Directory.GetFiles(testDir, "*.cs", SearchOption.AllDirectories);
         
         int count = 0;
@@ -222,7 +222,7 @@ public class FeasibilityTest
 
     private int CountTestFiles()
     {
-        var testDir = Path.Combine(_workspaceRoot, "src", "DemoCalc.Tests");
+        var testDir = Path.Combine(_workspaceRoot, "test-code", "DemoCalc.Tests");
         return Directory.GetFiles(testDir, "*Tests.cs", SearchOption.AllDirectories).Length;
     }
 

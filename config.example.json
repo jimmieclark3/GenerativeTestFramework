@@ -1,0 +1,90 @@
+{
+  // Coverage Thresholds
+  "LineCoverageThreshold": 90,
+  "BranchCoverageThreshold": 85,
+  "OverallCoverageThreshold": 88,
+  "StopOnAnyThreshold": false,
+
+  // Test Generation Limits
+  "MaxTestsPerMethod": 15,
+  "MaxTotalTests": 2000,
+  "MaxIterations": 200,
+  "TimeBudgetMinutes": 120,
+  "CostBudget": 25.00,
+
+  // Test Framework Settings
+  "TestFramework": "xunit",
+  "MockingFramework": "Moq",
+  "AssertionStyle": "BuiltIn",
+  "UseTheoryForParameterized": true,
+
+  // Test Naming and Organization
+  "TestNamingConvention": "{Type}_{Method}_Should_{Behavior}",
+  "OutputLayout": "per-type",
+  "GeneratedTestNamespace": null,
+  "GeneratedTestSubdirectory": "Generated",
+  "TestClassPrefix": "",
+  "TestClassSuffix": "Tests",
+
+  // Test Content Control
+  "IncludeComments": true,
+  "IncludeArrangeActAssertComments": true,
+  "IncludePrivateMethods": false,
+  "IncludeInternalMethods": true,
+  "IncludeStaticMethods": true,
+  "IncludeAsyncMethods": true,
+  "IncludeGenericMethods": true,
+  "IncludeExtensionMethods": true,
+  "IncludeProperties": false,
+  "IncludeConstructors": false,
+  "MinMethodComplexity": 1,
+  "MaxMethodComplexity": 1000,
+
+  // Test Quality Settings
+  "MinTestPassRate": 100,
+  "RequireDeterministicTests": true,
+  "MinCoverageImprovement": 0.1,
+  "DeterminismCheckRuns": 3,
+  "RequireCompilationSuccess": true,
+
+  // Filtering and Targeting
+  "IncludePatterns": [],
+  "ExcludePatterns": ["*Generated*", "*Designer*"],
+  "ExcludeAttributes": ["Obsolete", "EditorBrowsable"],
+  "ExcludeFilePatterns": ["*.Designer.cs"],
+  "TargetNamespaces": [],
+  "TargetAssemblies": [],
+  "MethodPriorityOrder": ["Branches", "Lines", "Complexity"],
+
+  // AI Provider Settings
+  "AiProvider": "Ollama",
+  "AiModel": "gpt-oss:20b",
+  "AiApiKey": null,
+  "AiBaseUrl": "http://localhost:11434",
+  "AiTemperature": 0.0,
+  "AiMaxTokens": 2000,
+  "AiTimeoutSeconds": 300,
+  "AiMaxRetries": 3,
+  "LocalModelPath": null,
+
+  // Output and Logging
+  "OutputDirectory": "artifacts",
+  "LogVerbosity": "Normal",
+  "SaveRequestResponses": true,
+  "GenerateHtmlReport": false,
+  "GenerateJsonReport": true,
+  "GenerateMarkdownReport": true,
+  "ShowProgress": true,
+  "ColorOutput": true,
+
+  // Advanced Settings
+  "ParallelGeneration": false,
+  "MaxParallelGenerations": 4,
+  "CacheWorkspace": true,
+  "SkipComplexDependencies": false,
+  "InfeasibleBranchAttempts": 5,
+  "ContinueOnError": true,
+  "DryRun": false
+}
+
+

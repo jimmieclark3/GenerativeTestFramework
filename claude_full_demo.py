@@ -32,7 +32,7 @@ print("────────────────────────�
 print(" Step 1: Building Project")
 print("─────────────────────────────────────────────────────")
 result = subprocess.run(
-    ["dotnet", "build", "src/DemoCalc/DemoCalc.csproj", "-v", "quiet"],
+    ["dotnet", "build", "test-code/DemoCalc/DemoCalc.csproj", "-v", "quiet"],
     cwd="/workspace",
     capture_output=True
 )
@@ -48,18 +48,18 @@ print("────────────────────────�
 print(" Step 2: Measuring Baseline Coverage")
 print("─────────────────────────────────────────────────────")
 subprocess.run(
-    ["rm", "-rf", "src/DemoCalc.Tests/TestResults"],
+    ["rm", "-rf", "test-code/DemoCalc.Tests/TestResults"],
     cwd="/workspace",
     capture_output=True
 )
 result = subprocess.run(
     ["dotnet", "test", "--collect:XPlat Code Coverage", "--results-directory:./TestResults", "-v", "quiet"],
-    cwd="/workspace/src/DemoCalc.Tests",
+    cwd="/workspace/test-code/DemoCalc.Tests",
     capture_output=True
 )
 
 # Find and parse baseline coverage
-baseline_files = glob.glob("/workspace/src/DemoCalc.Tests/TestResults/**/coverage.cobertura.xml", recursive=True)
+baseline_files = glob.glob("/workspace/test-code/DemoCalc.Tests/TestResults/**/coverage.cobertura.xml", recursive=True)
 baseline_coverage = 0
 if baseline_files:
     with open(baseline_files[0], 'r') as f:
@@ -173,7 +173,7 @@ try:
                 generated_code = generated_text
             
             # Save the generated tests
-            with open('/workspace/src/DemoCalc.Tests/ClaudeGeneratedTests.cs', 'w') as f:
+            with open('/workspace/test-code/DemoCalc.Tests/ClaudeGeneratedTests.cs', 'w') as f:
                 f.write(generated_code)
             
             # Print stats
@@ -199,7 +199,7 @@ except Exception as e:
 print("─────────────────────────────────────────────────────")
 print(" Step 4: Preview of Generated Tests")
 print("─────────────────────────────────────────────────────")
-with open('/workspace/src/DemoCalc.Tests/ClaudeGeneratedTests.cs', 'r') as f:
+with open('/workspace/test-code/DemoCalc.Tests/ClaudeGeneratedTests.cs', 'r') as f:
     lines = f.readlines()
     for i, line in enumerate(lines[:35], 1):
         print(f"{i:3d} | {line.rstrip()}")
@@ -212,13 +212,13 @@ print("────────────────────────�
 print(" Step 5: Running Claude-Generated Tests")
 print("─────────────────────────────────────────────────────")
 subprocess.run(
-    ["rm", "-rf", "src/DemoCalc.Tests/TestResults2"],
+    ["rm", "-rf", "test-code/DemoCalc.Tests/TestResults2"],
     cwd="/workspace",
     capture_output=True
 )
 result = subprocess.run(
     ["dotnet", "test", "--collect:XPlat Code Coverage", "--results-directory:./TestResults2"],
-    cwd="/workspace/src/DemoCalc.Tests",
+    cwd="/workspace/test-code/DemoCalc.Tests",
     capture_output=True,
     text=True
 )
@@ -250,7 +250,7 @@ else:
     print(output)
 
 # Measure improved coverage
-improved_files = glob.glob("/workspace/src/DemoCalc.Tests/TestResults2/**/coverage.cobertura.xml", recursive=True)
+improved_files = glob.glob("/workspace/test-code/DemoCalc.Tests/TestResults2/**/coverage.cobertura.xml", recursive=True)
 improved_coverage = 0
 if improved_files:
     with open(improved_files[0], 'r') as f:

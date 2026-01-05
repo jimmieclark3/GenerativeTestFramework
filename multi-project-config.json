@@ -5,7 +5,7 @@
       "description": "Simple calculator with 10 branch points",
       "solutionPath": "ReverseCoverage.sln",
       "testProjectPaths": [
-        "src/DemoCalc.Tests/DemoCalc.Tests.csproj"
+        "test-code/DemoCalc.Tests/DemoCalc.Tests.csproj"
       ],
       "coverageThreshold": 80,
       "iterationBudget": 5,
@@ -16,7 +16,7 @@
       "description": "Markdown parsing utility - real-world example",
       "solutionPath": "ReverseCoverage.sln",
       "testProjectPaths": [
-        "src/MarkdownHelper.Tests/MarkdownHelper.Tests.csproj"
+        "test-code/MarkdownHelper.Tests/MarkdownHelper.Tests.csproj"
       ],
       "coverageThreshold": 70,
       "iterationBudget": 10,

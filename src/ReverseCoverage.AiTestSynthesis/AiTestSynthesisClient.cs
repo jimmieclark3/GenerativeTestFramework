@@ -23,6 +23,7 @@ public class AiTestSynthesisClient : IAiTestSynthesisProvider
             AiProvider.CustomHttp => new CustomHttpProvider(options),
             AiProvider.Mock => new MockAiProvider(options),
             AiProvider.Claude => new ClaudeProvider(options),
+            AiProvider.Ollama => new OllamaProvider(options),
             _ => throw new NotSupportedException($"Provider {options.Provider} is not supported.")
         };
     }

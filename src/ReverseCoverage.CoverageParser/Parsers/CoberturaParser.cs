@@ -82,7 +82,24 @@ public static class CoberturaParser
                                 var branchIndex = 0;
                                 foreach (var condition in branches)
                                 {
-                                    var conditionHits = int.Parse(condition.Attribute("coverage")?.Value ?? "0");
+                                    // Handle coverage as either number or percentage (e.g., "100%" or "0")
+                                    var coverageValue = condition.Attribute("coverage")?.Value ?? "0";
+                                    var conditionHits = 0;
+                                    if (coverageValue.EndsWith("%"))
+                                    {
+                                        // Parse percentage: "100%" -> 100, "0%" -> 0
+                                        var percentStr = coverageValue.TrimEnd('%');
+                                        if (int.TryParse(percentStr, out var percent))
+                                        {
+                                            conditionHits = percent == 100 ? 1 : 0; // 100% = covered, else uncovered
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // Parse as integer
+                                        int.TryParse(coverageValue, out conditionHits);
+                                    }
+                                    
                                     if (conditionHits == 0)
                                     {
                                         uncoveredBranchPoints.Add(new BranchPoint

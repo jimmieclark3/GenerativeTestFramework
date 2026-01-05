@@ -63,6 +63,7 @@ public enum AiProvider
     OpenAIResponses,
     CustomHttp,
     Mock,   // For testing/feasibility validation
-    Claude  // Anthropic Claude API
+    Claude,  // Anthropic Claude API
+    Ollama   // Local Ollama LLM server
 }
 

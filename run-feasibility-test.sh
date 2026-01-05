@@ -38,7 +38,7 @@ echo "────────────────────────�
 echo "STEP 2: Measuring baseline coverage..."
 echo "──────────────────────────────────────────────────────"
 mkdir -p artifacts/feasibility/baseline
-dotnet test src/DemoCalc.Tests/DemoCalc.Tests.csproj \
+dotnet test test-code/DemoCalc.Tests/DemoCalc.Tests.csproj \
     /p:CollectCoverage=true \
     /p:CoverletOutputFormat=cobertura \
     /p:CoverletOutput="../../artifacts/feasibility/baseline/" \
@@ -63,7 +63,7 @@ echo "STEP 3: Running orchestrator with Mock AI provider..."
 echo "──────────────────────────────────────────────────────"
 timeout 60s dotnet run --project src/ReverseCoverage.Orchestrator/ReverseCoverage.Orchestrator.csproj --no-build -- \
     --solution-path "$WORKSPACE_ROOT/ReverseCoverage.sln" \
-    --test-project-path "$WORKSPACE_ROOT/src/DemoCalc.Tests/DemoCalc.Tests.csproj" \
+    --test-project-path "$WORKSPACE_ROOT/test-code/DemoCalc.Tests/DemoCalc.Tests.csproj" \
     --coverage-threshold 80 \
     --iteration-budget 3 \
     --provider Mock || true
@@ -75,18 +75,18 @@ echo ""
 echo "──────────────────────────────────────────────────────"
 echo "STEP 4: Rebuilding tests with generated code..."
 echo "──────────────────────────────────────────────────────"
-if [ -d "src/DemoCalc.Tests/Generated" ]; then
-    TEST_FILE_COUNT=$(find src/DemoCalc.Tests/Generated -name "*.cs" 2>/dev/null | wc -l)
+if [ -d "test-code/DemoCalc.Tests/Generated" ]; then
+    TEST_FILE_COUNT=$(find test-code/DemoCalc.Tests/Generated -name "*.cs" 2>/dev/null | wc -l)
     echo "Found $TEST_FILE_COUNT generated test files"
     
-    dotnet build src/DemoCalc.Tests/DemoCalc.Tests.csproj --configuration Debug --verbosity quiet
+    dotnet build test-code/DemoCalc.Tests/DemoCalc.Tests.csproj --configuration Debug --verbosity quiet
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✓${NC} Tests rebuilt successfully"
     else
         echo -e "${RED}✗${NC} Test rebuild failed - checking generated code quality"
         echo ""
         echo "Generated test files:"
-        find src/DemoCalc.Tests/Generated -name "*.cs" -exec echo "  - {}" \;
+        find test-code/DemoCalc.Tests/Generated -name "*.cs" -exec echo "  - {}" \;
     fi
 else
     echo -e "${YELLOW}⚠${NC} No generated test files found"
@@ -97,7 +97,7 @@ echo ""
 echo "──────────────────────────────────────────────────────"
 echo "STEP 5: Running all tests..."
 echo "──────────────────────────────────────────────────────"
-dotnet test src/DemoCalc.Tests/DemoCalc.Tests.csproj --nologo --verbosity normal || true
+dotnet test test-code/DemoCalc.Tests/DemoCalc.Tests.csproj --nologo --verbosity normal || true
 echo ""
 
 # Step 6: Measure improved coverage
@@ -105,7 +105,7 @@ echo "────────────────────────�
 echo "STEP 6: Measuring improved coverage..."
 echo "──────────────────────────────────────────────────────"
 mkdir -p artifacts/feasibility/improved
-dotnet test src/DemoCalc.Tests/DemoCalc.Tests.csproj \
+dotnet test test-code/DemoCalc.Tests/DemoCalc.Tests.csproj \
     /p:CollectCoverage=true \
     /p:CoverletOutputFormat=cobertura \
     /p:CoverletOutput="../../artifacts/feasibility/improved/" \
@@ -141,9 +141,9 @@ echo "Improved Coverage:  ${IMPROVED_LINE_PCT}% line, ${IMPROVED_BRANCH_PCT}% br
 echo "Improvement:        +${LINE_DELTA}% line, +${BRANCH_DELTA}% branch"
 echo ""
 
-if [ -d "src/DemoCalc.Tests/Generated" ]; then
+if [ -d "test-code/DemoCalc.Tests/Generated" ]; then
     echo "Generated Files:"
-    find src/DemoCalc.Tests/Generated -name "*.cs" -exec basename {} \; | sed 's/^/  - /'
+    find test-code/DemoCalc.Tests/Generated -name "*.cs" -exec basename {} \; | sed 's/^/  - /'
     echo ""
 fi
 
